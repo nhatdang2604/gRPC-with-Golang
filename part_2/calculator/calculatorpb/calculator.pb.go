@@ -106,3 +106,4 @@ var _Calculator_serviceDesc = grpc.ServiceDesc{
 	Streams:     []grpc.StreamDesc{},
 	Metadata:    "calculatorpb/calculator.proto",
 }
+
