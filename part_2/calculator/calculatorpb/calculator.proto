@@ -2,6 +2,6 @@ syntax = "proto3";
 
 package calculator;
 
-option go_package = "calculatorpb";
+option go_package = "./calculatorpb";
 
 service Calculator {}
