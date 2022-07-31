@@ -23,12 +23,12 @@ func main() {
 		log.Fatalf("Error while create listen %v", err)
 	}
 
-	s := grpc.NewServer()
+	server := grpc.NewServer()
 
-	calculatorpb.RegisterCalculatorServer(s, &Server{})
+	calculatorpb.RegisterCalculatorServer(server, &Server{})
 
 	fmt.Println("Calculator is running")
-	err = s.Serve(listener)
+	err = server.Serve(listener)
 
 	if nil != err {
 		log.Fatalf("Error while serve %v", err)
