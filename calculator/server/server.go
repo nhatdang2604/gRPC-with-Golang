@@ -18,7 +18,7 @@ type Server struct{}
 
 func main() {
 
-	lis, err := net.Listen("tcp", IP+":"+PORT)
+	listener, err := net.Listen("tcp", IP+":"+PORT)
 	if nil != err {
 		log.Fatalf("Error while create listen %v", err)
 	}
@@ -28,7 +28,7 @@ func main() {
 	calculatorpb.RegisterCalculatorServer(s, &Server{})
 
 	fmt.Println("Calculator is running")
-	err = s.Serve(lis)
+	err = s.Serve(listener)
 
 	if nil != err {
 		log.Fatalf("Error while serve %v", err)
