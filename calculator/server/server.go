@@ -48,6 +48,7 @@ func (server *Server) PrimeNumberDecomposition(request *calculatorpb.PNDRequest,
 			stream.Send(&calculatorpb.PNDResponse{
 				Number: prime,
 			})
+
 		} else {
 			prime++
 			log.Printf("Prime increase to %v", prime)
