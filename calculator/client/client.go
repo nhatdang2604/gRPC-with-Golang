@@ -18,7 +18,7 @@ func callSum(client calculatorpb.CalculatorClient) {
 	log.Println("Calling Sum API")
 
 	response, err := client.Sum(context.Background(), &calculatorpb.SumRequest{
-		Num1: 5,
+		Num1: 7,
 		Num2: 6,
 	})
 
