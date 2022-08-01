@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net"
@@ -15,6 +16,14 @@ const (
 )
 
 type Server struct{}
+
+func (server *Server) Sum(ctx context.Context, request *calculatorpb.SumRequest) (*calculatorpb.SumResponse, error) {
+	response := &calculatorpb.SumResponse{
+		Result: request.GetNum1() + request.GetNum2(),
+	}
+
+	return response, nil
+}
 
 func main() {
 
