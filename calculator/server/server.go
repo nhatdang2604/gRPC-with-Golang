@@ -18,6 +18,8 @@ const (
 type Server struct{}
 
 func (server *Server) Sum(ctx context.Context, request *calculatorpb.SumRequest) (*calculatorpb.SumResponse, error) {
+
+	log.Println("Sum API called ...")
 	response := &calculatorpb.SumResponse{
 		Result: request.GetNum1() + request.GetNum2(),
 	}
