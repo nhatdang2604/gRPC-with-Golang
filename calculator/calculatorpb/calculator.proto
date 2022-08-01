@@ -2,6 +2,17 @@ syntax = "proto3";
 
 package calculator;
 
-option go_package = "./calculatorpb";
+option go_package = "./calculator/calculatorpb";
 
-service Calculator {}
+message SumRequest {
+    int32 num1 = 1;
+    int32 num2 = 2;
+}
+
+message SumResponse {
+    int32 result = 1;
+}
+
+service Calculator {
+    rpc Sum(SumRequest) returns (SumResponse) {}
+}
