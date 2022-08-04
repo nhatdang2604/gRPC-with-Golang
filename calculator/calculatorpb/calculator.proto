@@ -21,6 +21,14 @@ message PNDResponse {
     int32 number = 1;
 }
 
+message AverageRequest {
+    float number = 1;
+}
+
+message AverageResponse {
+    float result = 1;
+}
+
 service Calculator {
 
     //Unari API
@@ -29,4 +37,6 @@ service Calculator {
     //Server Streaming API
     rpc PrimeNumberDecomposition(PNDRequest) returns (stream PNDResponse) {}
 
+    //Client Streaming API
+    rpc Average(stream AverageRequest) returns (AverageResponse) {}
 }
