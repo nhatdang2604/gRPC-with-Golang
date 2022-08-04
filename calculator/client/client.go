@@ -52,6 +52,39 @@ func callPND(client calculatorpb.CalculatorClient) {
 	}
 }
 
+func callAverage(client calculatorpb.CalculatorClient) {
+	log.Println("Calling Average API")
+
+	stream, err := client.Average(context.Background())
+
+	if nil != err {
+		log.Fatalf("Error while calling Average API: %v", err)
+	}
+
+	requests := []*calculatorpb.AverageRequest{
+		&calculatorpb.AverageRequest{Number: 2},
+		&calculatorpb.AverageRequest{Number: 4},
+		&calculatorpb.AverageRequest{Number: 6},
+		&calculatorpb.AverageRequest{Number: 8},
+	}
+
+	for _, request := range requests {
+		err = stream.Send(request)
+
+		if nil != err {
+			log.Fatalf("Error while sending Average request: %v", err)
+		}
+	}
+
+	response, err := stream.CloseAndRecv()
+	if nil != err {
+		log.Fatalf("ERror while recieveing Average response: %v", err)
+	}
+
+	log.Printf("Average response %v", response.GetResult())
+
+}
+
 func main() {
 	clientConnection, err := grpc.Dial(IP+":"+PORT, grpc.WithInsecure())
 
@@ -66,5 +99,6 @@ func main() {
 	client := calculatorpb.NewCalculatorClient(clientConnection)
 
 	//callSum(client)
-	callPND(client)
+	//callPND(client)
+	callAverage(client)
 }
