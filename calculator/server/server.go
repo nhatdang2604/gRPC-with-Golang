@@ -90,6 +90,7 @@ func (server *Server) Average(stream calculatorpb.Calculator_AverageServer) erro
 		count += 1
 		total += request.GetNumber()
 	}
+
 }
 
 func main() {
