@@ -143,6 +143,7 @@ func callFindMax(client calculatorpb.CalculatorClient) {
 	//Make the program blocking here,
 	//	waiting the unblock signal from the reciever goroutine
 	<-waitChannel
+
 }
 
 func main() {
