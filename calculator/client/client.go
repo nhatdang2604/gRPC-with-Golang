@@ -85,6 +85,66 @@ func callAverage(client calculatorpb.CalculatorClient) {
 
 }
 
+func callFindMax(client calculatorpb.CalculatorClient) {
+	log.Println("Calling Find Max API...")
+
+	stream, err := client.FindMax(context.Background())
+
+	if nil != err {
+		log.Fatalf("Error while calling Find Max API: %v", err)
+	}
+
+	waitChannel := make(chan struct{})
+
+	//A go routine for sending multiple requests
+	go func() {
+
+		requests := []*calculatorpb.FindMaxRequest{
+			&calculatorpb.FindMaxRequest{Number: 1},
+			&calculatorpb.FindMaxRequest{Number: -1},
+			&calculatorpb.FindMaxRequest{Number: 2},
+			&calculatorpb.FindMaxRequest{Number: -2},
+			&calculatorpb.FindMaxRequest{Number: 3},
+		}
+
+		for _, request := range requests {
+			err := stream.Send(request)
+			if nil != err {
+				log.Fatalf("Send Find Max Request error: %v", err)
+				break
+			}
+		}
+
+		stream.CloseSend()
+	}()
+
+	//A go routine for recieving multiple response
+	go func() {
+		for {
+			response, err := stream.Recv()
+
+			if io.EOF == err {
+				log.Printf("Ending Find Max API")
+				break
+			}
+
+			if nil != err {
+				log.Fatalf("Recieve Find Max Response error: %v", err)
+				break
+			}
+
+			log.Printf("Max: %v\n", response.GetMax())
+		}
+
+		//Unblock the closured method
+		close(waitChannel)
+	}()
+
+	//Make the program blocking here,
+	//	waiting the unblock signal from the reciever goroutine
+	<-waitChannel
+}
+
 func main() {
 	clientConnection, err := grpc.Dial(IP+":"+PORT, grpc.WithInsecure())
 
@@ -100,5 +160,6 @@ func main() {
 
 	//callSum(client)
 	//callPND(client)
-	callAverage(client)
+	//callAverage(client)
+	callFindMax(client)
 }
