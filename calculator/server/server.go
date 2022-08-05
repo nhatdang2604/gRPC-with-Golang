@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"net"
 
 	"github.com/nhatdang2604/gRPC-with-Golang/calculator/calculatorpb"
@@ -84,6 +85,7 @@ func (server *Server) Average(stream calculatorpb.Calculator_AverageServer) erro
 
 		if nil != err {
 			log.Fatalf("Error while reciving average %v", err)
+			return err
 		}
 
 		log.Printf("Recieved request: %v\n", request)
@@ -91,6 +93,47 @@ func (server *Server) Average(stream calculatorpb.Calculator_AverageServer) erro
 		total += request.GetNumber()
 	}
 
+}
+
+func (server *Server) FindMax(stream calculatorpb.Calculator_FindMaxServer) error {
+
+	//Logging
+	log.Println("Find Max API called ...")
+
+	max := int32(math.MinInt32)
+
+	for {
+		request, err := stream.Recv()
+
+		//EOF handle
+		if io.EOF == err {
+			log.Printf("EOF....\n")
+			return nil
+		}
+
+		//Error handle while recieving request
+		if nil != err {
+			log.Fatalf("Error while recieving find max: %v", err)
+			return err
+		}
+
+		//Calculate the current max
+		buffer := request.GetNumber()
+		if max < buffer {
+			max = buffer
+		}
+
+		//Send the current max to client
+		err = stream.Send(&calculatorpb.FindMaxResponse{
+			Max: max,
+		})
+
+		//Handle error while sending response
+		if nil != err {
+			log.Fatalf("Error while sending max: %v", err)
+			return err
+		}
+	}
 }
 
 func main() {
