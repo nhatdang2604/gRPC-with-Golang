@@ -10,6 +10,8 @@ import (
 
 	"github.com/nhatdang2604/gRPC-with-Golang/calculator/calculatorpb"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 const (
@@ -134,6 +136,24 @@ func (server *Server) FindMax(stream calculatorpb.Calculator_FindMaxServer) erro
 			return err
 		}
 	}
+}
+
+func (server *Server) Sqrt(ctx context.Context, request *calculatorpb.SqrtRequest) (*calculatorpb.SqrtResponse, error) {
+
+	//Logging
+	log.Println("Square Root API called ...")
+
+	number := request.GetNumber()
+
+	//Handle for case: square root for a negative number
+	if number < 0 {
+		return nil, status.Errorf(
+			codes.InvalidArgument,
+			"Expected number greater or equal 0",
+		)
+	}
+
+	return &calculatorpb.SqrtResponse{Sqrt: math.Sqrt(float64(number))}, nil
 }
 
 func main() {
