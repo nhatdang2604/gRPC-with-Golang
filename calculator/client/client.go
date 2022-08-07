@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"log"
+	"time"
 
 	"github.com/nhatdang2604/gRPC-with-Golang/calculator/calculatorpb"
 	"google.golang.org/grpc"
@@ -174,6 +175,36 @@ func callSqrt(client calculatorpb.CalculatorClient, nums ...int32) {
 	}
 }
 
+func callSumWithDeadline(client calculatorpb.CalculatorClient, timeout time.Duration) {
+
+	log.Println("Calling Sum With Deadline API")
+
+	ctx, cancel := context.WithTimeout(
+		context.Background(),
+		timeout,
+	)
+
+	defer cancel()
+
+	response, err := client.SumWithDeadline(
+		ctx,
+		&calculatorpb.SumRequest{
+			Num1: 2,
+			Num2: 3,
+		},
+	)
+
+	if nil != err {
+		statusError, _ := status.FromError(err)
+		log.Printf("Error message: %v\r\n", statusError.Err())
+		log.Printf("Status code: %v\r\n", statusError.Code())
+		return
+	}
+
+	log.Printf("Sum With Deadline API response: %v", response.GetResult())
+
+}
+
 func main() {
 	clientConnection, err := grpc.Dial(IP+":"+PORT, grpc.WithInsecure())
 
@@ -191,5 +222,8 @@ func main() {
 	//callPND(client)
 	//callAverage(client)
 	//callFindMax(client)
-	callSqrt(client, -2, -1, 0, 1, 2)
+	//callSqrt(client, -2, -1, 0, 1, 2)
+	callSumWithDeadline(client, 1*time.Second) //timeout
+	callSumWithDeadline(client, 5*time.Second) //not timeout
+
 }
