@@ -47,7 +47,7 @@ message SqrtResponse {
 
 service Calculator {
 
-    //Unari API
+    //Unary API
     rpc Sum(SumRequest) returns (SumResponse) {}
 
     //Server Streaming API
@@ -61,4 +61,7 @@ service Calculator {
 
     //For Error handling chapter
     rpc Sqrt(SqrtRequest) returns (SqrtResponse) {}
+
+    //Fod Deadline chapter
+    rpc SumWithDeadline(SumRequest) returns (SumResponse) {}
 }
