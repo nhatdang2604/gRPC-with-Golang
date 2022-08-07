@@ -9,6 +9,7 @@ import (
 	"github.com/nhatdang2604/gRPC-with-Golang/calculator/calculatorpb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/status"
 )
 
@@ -206,7 +207,15 @@ func callSumWithDeadline(client calculatorpb.CalculatorClient, timeout time.Dura
 }
 
 func main() {
-	clientConnection, err := grpc.Dial(IP+":"+PORT, grpc.WithInsecure())
+
+	certFile := "calculator/ssl/ca.crt"
+	credential, sslError := credentials.NewClientTLSFromFile(certFile, "")
+	if nil != sslError {
+		log.Fatalf("Create client credentials ssl error: %v", sslError)
+	}
+
+	clientConnection, err := grpc.Dial(IP+":"+PORT, grpc.WithTransportCredentials(credential))
+	//clientConnection, err := grpc.Dial(IP+":"+PORT, grpc.WithInsecure())
 
 	//Error handle
 	if nil != err {
