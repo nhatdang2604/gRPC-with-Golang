@@ -143,6 +143,7 @@ func (server *Server) Sqrt(ctx context.Context, request *calculatorpb.SqrtReques
 	//Logging
 	log.Println("Square Root API called ...")
 
+	//Fetch data from request
 	number := request.GetNumber()
 
 	//Handle for case: square root for a negative number
