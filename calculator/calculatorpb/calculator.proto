@@ -37,6 +37,14 @@ message FindMaxResponse {
     int32 max = 1;
 }
 
+message SqrtRequest {
+    int32 number = 1;
+}
+
+message SqrtResponse {
+    double sqrt = 1;
+}
+
 service Calculator {
 
     //Unari API
@@ -50,4 +58,7 @@ service Calculator {
 
     //Bi-Directional Streaming API
     rpc FindMax(stream FindMaxRequest) returns (stream FindMaxResponse) {}
+
+    //For Error handling chapter
+    rpc Sqrt(SqrtRequest) returns (SqrtResponse) {}
 }
