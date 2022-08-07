@@ -7,6 +7,8 @@ import (
 
 	"github.com/nhatdang2604/gRPC-with-Golang/calculator/calculatorpb"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 const (
@@ -146,6 +148,32 @@ func callFindMax(client calculatorpb.CalculatorClient) {
 
 }
 
+func callSqrt(client calculatorpb.CalculatorClient, nums ...int32) {
+
+	log.Println("Calling Square Root API")
+
+	for _, num := range nums {
+		response, err := client.Sqrt(context.Background(), &calculatorpb.SqrtRequest{
+			Number: num,
+		})
+
+		if nil != err {
+			log.Printf("Call Square Root API error: %v\r\n", err)
+			if errorStatus, ok := status.FromError(err); ok {
+				log.Printf("Error message: %v", errorStatus.Message())
+				log.Printf("Status code: %v", errorStatus.Code())
+
+				if codes.InvalidArgument == errorStatus.Code() {
+					log.Printf("InvalidArgument number %v", num)
+				}
+			}
+
+		} else {
+			log.Printf("Square Root API responsed: %v\r\n", response.GetSqrt())
+		}
+	}
+}
+
 func main() {
 	clientConnection, err := grpc.Dial(IP+":"+PORT, grpc.WithInsecure())
 
@@ -162,5 +190,6 @@ func main() {
 	//callSum(client)
 	//callPND(client)
 	//callAverage(client)
-	callFindMax(client)
+	//callFindMax(client)
+	callSqrt(client, -2, -1, 0, 1, 2)
 }
