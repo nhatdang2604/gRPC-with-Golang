@@ -7,6 +7,7 @@ import (
 	"log"
 	"math"
 	"net"
+	"time"
 
 	"github.com/nhatdang2604/gRPC-with-Golang/calculator/calculatorpb"
 	"google.golang.org/grpc"
@@ -155,6 +156,35 @@ func (server *Server) Sqrt(ctx context.Context, request *calculatorpb.SqrtReques
 	}
 
 	return &calculatorpb.SqrtResponse{Sqrt: math.Sqrt(float64(number))}, nil
+}
+
+func (server *Server) SumWithDeadline(ctx context.Context, request *calculatorpb.SumRequest) (*calculatorpb.SumResponse, error) {
+
+	//Logging
+	log.Println("Sum With Deadline API called ...")
+
+	//Sleep `sleepCount` seconds!
+	//Simulate a heavyweight process
+	sleepCount := 3
+	for i := 0; i < sleepCount; i++ {
+
+		if context.Canceled == ctx.Err() {
+			log.Println("Context is cancelled ...")
+			return nil, status.Errorf(
+				codes.Canceled,
+				"Client cancelled request",
+			)
+		}
+
+		//Sleep 1 second
+		time.Sleep(1 * time.Second)
+	}
+
+	response := &calculatorpb.SumResponse{
+		Result: request.GetNum1() + request.GetNum2(),
+	}
+
+	return response, nil
 }
 
 func main() {
