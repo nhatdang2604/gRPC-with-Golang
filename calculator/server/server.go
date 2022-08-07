@@ -198,7 +198,7 @@ func main() {
 
 	//SSL File parsing
 	certFile := "calculator/ssl/server.crt"
-	keyFile := "calculator/ssl/server.pem"
+	keyFile := "calculator/ssl/server.key"
 	credential, sslError := credentials.NewServerTLSFromFile(certFile, keyFile)
 	if nil != sslError {
 		log.Fatalf("Create crediential ssl error: %v", sslError)

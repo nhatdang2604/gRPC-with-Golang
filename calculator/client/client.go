@@ -208,7 +208,7 @@ func callSumWithDeadline(client calculatorpb.CalculatorClient, timeout time.Dura
 
 func main() {
 
-	certFile := "calculator/ssl/ca.crt"
+	certFile := "calculator/ssl/server.crt"
 	credential, sslError := credentials.NewClientTLSFromFile(certFile, "")
 	if nil != sslError {
 		log.Fatalf("Create client credentials ssl error: %v", sslError)
