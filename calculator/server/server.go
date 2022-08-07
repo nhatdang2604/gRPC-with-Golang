@@ -12,6 +12,7 @@ import (
 	"github.com/nhatdang2604/gRPC-with-Golang/calculator/calculatorpb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/status"
 )
 
@@ -189,18 +190,26 @@ func (server *Server) SumWithDeadline(ctx context.Context, request *calculatorpb
 
 func main() {
 
+	//Setup connection
 	listener, err := net.Listen("tcp", IP+":"+PORT)
 	if nil != err {
 		log.Fatalf("Error while create listen %v", err)
 	}
 
-	server := grpc.NewServer()
+	//SSL File parsing
+	certFile := "calculator/ssl/server.crt"
+	keyFile := "calculator/ssl/server.pem"
+	credential, sslError := credentials.NewServerTLSFromFile(certFile, keyFile)
+	if nil != sslError {
+		log.Fatalf("Create crediential ssl error: %v", sslError)
+	}
+	options := grpc.Creds(credential)
 
+	//Building the server
+	server := grpc.NewServer(options)
 	calculatorpb.RegisterCalculatorServer(server, &Server{})
-
 	fmt.Println("Calculator is running")
 	err = server.Serve(listener)
-
 	if nil != err {
 		log.Fatalf("Error while serve %v", err)
 	}
