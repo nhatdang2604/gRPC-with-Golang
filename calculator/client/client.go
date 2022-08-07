@@ -225,5 +225,4 @@ func main() {
 	//callSqrt(client, -2, -1, 0, 1, 2)
 	callSumWithDeadline(client, 1*time.Second) //timeout
 	callSumWithDeadline(client, 5*time.Second) //not timeout
-
 }
