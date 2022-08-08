@@ -5,9 +5,9 @@ run-cal-server:
 run-cal-client:
 	go run calculator/client/client.go
 
-gen-cont:
-	protoc contact/contactpb/contact.proto --go_out=plugin=grpc:.
-run-cont-server:
+gen-contact:
+	protoc contact/contactpb/contact.proto --go_out=plugins=grpc:.
+run-contact-server:
 	go run contact/server/server.go
-run-cont-client:
+run-contact-client:
 	go run contact/client/client.go
