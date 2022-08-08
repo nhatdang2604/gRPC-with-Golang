@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net"
 	"strings"
@@ -25,7 +26,7 @@ func main() {
 
 	server := grpc.NewServer()
 	contactpb.RegisterContactServiceServer(server, &Server{})
-
+	fmt.Println("Contact service is running")
 	err = server.Serve(listener)
 
 	if nil != err {
