@@ -1,6 +1,6 @@
 gen-cal:
 	protoc calculator/calculatorpb/calculator.proto --go_out=plugins=grpc:.
-run-server:
+run-cal-server:
 	go run calculator/server/server.go
-run-client:
+run-cal-client:
 	go run calculator/client/client.go

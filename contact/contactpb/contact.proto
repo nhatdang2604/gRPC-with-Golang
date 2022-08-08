@@ -3,3 +3,7 @@ syntax = "proto3";
 package contact;
 
 option go_package = "./contact/contactpb";
+
+service ContactService {
+    
+}

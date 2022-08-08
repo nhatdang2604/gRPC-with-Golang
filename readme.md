@@ -14,10 +14,10 @@
 
 ### Run the server
 - Browse to the root folder
-- Run this command: `make run-server` to run the code binding in the **Makefile** file
+- Run this command: `make run-cal-server` to run the code binding in the **Makefile** file
 - We would see the notification that the server is running on console
 
 ### Run the client app
 - Browse to the root folder
-- Run this command: `make run-client` to run the code binding in the **Makefile** file
+- Run this command: `make run-cal-client` to run the code binding in the **Makefile** file
 - We would see the notification that the client is communicating with the server on console
