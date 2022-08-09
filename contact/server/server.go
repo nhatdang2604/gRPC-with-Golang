@@ -22,6 +22,10 @@ const (
 
 	//Database stuffs
 	STRING_CONNECT_METADATA = "root:dangkl123@tcp(127.0.0.1:3306)/contact?charset=utf8"
+
+	//Errors code from Insert Contact API
+	INSERT_CONTACT_SUCCESS_CODE = 1
+	INSERT_CONTACT_ERROR_CODE   = 2
 )
 
 type Server struct{}
@@ -35,7 +39,7 @@ func (server *Server) Insert(ctx context.Context, request *contactpb.InsertConta
 
 	if nil != err {
 		response = &contactpb.InsertContactResponse{
-			StatusCode: 1,
+			StatusCode: INSERT_CONTACT_ERROR_CODE,
 			Message:    "Error while inserting contact",
 		}
 
@@ -43,7 +47,7 @@ func (server *Server) Insert(ctx context.Context, request *contactpb.InsertConta
 	}
 
 	response = &contactpb.InsertContactResponse{
-		StatusCode: 0,
+		StatusCode: INSERT_CONTACT_SUCCESS_CODE,
 		Message:    "OK",
 	}
 
