@@ -32,6 +32,12 @@ func init() {
 		log.Panicf("Connect database failed: %v", err)
 	}
 
+	//Automatic generate table
+	err = orm.RunSyncdb("default", false, true)
+	if nil != err {
+		log.Panicf("Migrate database failed: %v", err)
+	}
+
 	log.Println("Connect database successfully")
 }
 
