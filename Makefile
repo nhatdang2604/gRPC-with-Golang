@@ -8,6 +8,6 @@ run-cal-client:
 gen-contact:
 	protoc contact/contactpb/contact.proto --go_out=plugins=grpc:.
 run-contact-server:
-	go run contact/server/server.go
+	go run contact/server/server.go contact/server/models.go
 run-contact-client:
 	go run contact/client/client.go
