@@ -32,6 +32,9 @@ func init() {
 		log.Panicf("Connect database failed: %v", err)
 	}
 
+	//Register models
+	orm.RegisterModel(new(ContactInfo))
+
 	//Automatic generate table
 	err = orm.RunSyncdb("default", false, true)
 	if nil != err {
