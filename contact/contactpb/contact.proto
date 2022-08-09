@@ -4,6 +4,22 @@ package contact;
 
 option go_package = "./contact/contactpb";
 
+message Contact {
+    int64 id = 1;
+    string phoneNumber = 2;
+    string name = 3;
+    string address = 4;
+}
+
+message InsertContactRequest {
+    Contact contact = 1;
+}
+
+message InsertContactResponse {
+    int32 statusCode = 1;   //0 == statusCode <=> success
+    string message = 2;
+}
+
 service ContactService {
-    
+    rpc Insert(InsertContactRequest) returns (InsertContactResponse){}
 }
