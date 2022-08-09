@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net"
@@ -23,6 +24,30 @@ const (
 )
 
 type Server struct{}
+
+//Insert the contact from the request
+func (server *Server) Insert(ctx context.Context, request *contactpb.InsertContactRequest) (response *contactpb.InsertContactResponse, err error) {
+	log.Println("Insert API contact is called...")
+
+	contactInfo := Parse(*request.GetContact())
+	err = contactInfo.Insert()
+
+	if nil != err {
+		response = &contactpb.InsertContactResponse{
+			StatusCode: 1,
+			Message:    "Error while inserting contact",
+		}
+
+		return
+	}
+
+	response = &contactpb.InsertContactResponse{
+		StatusCode: 0,
+		Message:    "OK",
+	}
+
+	return
+}
 
 func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)

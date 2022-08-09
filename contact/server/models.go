@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/beego/beego/v2/client/orm"
+	"github.com/nhatdang2604/gRPC-with-Golang/contact/contactpb"
 )
 
 type ContactInfo struct {
@@ -13,6 +14,7 @@ type ContactInfo struct {
 	Address     string `orm:"type(text)"`
 }
 
+//Insert the caller contact info to the database
 func (info *ContactInfo) Insert() error {
 	o := orm.NewOrm()
 	id, err := o.Insert(info)
@@ -23,4 +25,18 @@ func (info *ContactInfo) Insert() error {
 
 	log.Printf("Insert contact with id = %v successfully", id)
 	return nil
+}
+
+//Parse the contactpb.Contact to ContactInfo
+func Parse(target contactpb.Contact) *ContactInfo {
+
+	//Using target getter to inject to the ContactInfo
+	result := ContactInfo{
+		Id:          target.GetId(),
+		PhoneNumber: target.GetPhoneNumber(),
+		Name:        target.GetName(),
+		Address:     target.GetAddress(),
+	}
+
+	return &result
 }
