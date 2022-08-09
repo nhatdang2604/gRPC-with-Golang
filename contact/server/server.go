@@ -9,7 +9,6 @@ import (
 	"github.com/nhatdang2604/gRPC-with-Golang/contact/contactpb"
 	"google.golang.org/grpc"
 
-	"github.com/beego/beego/adapter/orm"
 	"github.com/beego/beego/v2/client/orm"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -27,9 +26,9 @@ type Server struct{}
 
 func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
-	dataSource := "root:dangkl123@tcp{127.0.0.1:3306}/contact?charset=utf8"
-	err := orm.RegisterDataBase("default", "mysql", dataSource, 100, 100)
-	if nil == err {
+	dataSource := "root:dangkl123@tcp(127.0.0.1:3306)/contact?charset=utf8"
+	err := orm.RegisterDataBase("default", "mysql", dataSource)
+	if nil != err {
 		log.Panicf("Connect database failed: %v", err)
 	}
 
