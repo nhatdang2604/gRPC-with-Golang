@@ -21,13 +21,14 @@ const (
 	PORT = "50070"
 
 	//Database stuffs
+	STRING_CONNECT_METADATA = "root:dangkl123@tcp(127.0.0.1:3306)/contact?charset=utf8"
 )
 
 type Server struct{}
 
 //Insert the contact from the request
 func (server *Server) Insert(ctx context.Context, request *contactpb.InsertContactRequest) (response *contactpb.InsertContactResponse, err error) {
-	log.Println("Insert API contact is called...")
+	log.Println("Insert Contact API is called...")
 
 	contactInfo := Parse(*request.GetContact())
 	err = contactInfo.Insert()
@@ -51,7 +52,7 @@ func (server *Server) Insert(ctx context.Context, request *contactpb.InsertConta
 
 func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
-	dataSource := "root:dangkl123@tcp(127.0.0.1:3306)/contact?charset=utf8"
+	dataSource := STRING_CONNECT_METADATA
 	err := orm.RegisterDataBase("default", "mysql", dataSource)
 	if nil != err {
 		log.Panicf("Connect database failed: %v", err)
