@@ -27,6 +27,21 @@ func (info *ContactInfo) Insert() error {
 	return nil
 }
 
+//Update the caller contact info to the database
+func (info *ContactInfo) Update() error {
+	o := orm.NewOrm()
+
+	//Update all fields of the current info
+	_, err := o.Update(info)
+	if nil != err {
+		log.Printf("Update contact with id = %v error: %v\r\n", info.Id, err)
+		return err
+	}
+
+	log.Printf("Update contact with id = %v successfully", info.Id)
+	return nil
+}
+
 //Parse the contactpb.Contact to ContactInfo
 func Parse(target contactpb.Contact) *ContactInfo {
 
