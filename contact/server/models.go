@@ -72,6 +72,38 @@ func Read(id int64) (*ContactInfo, error) {
 	return info, nil
 }
 
+//Search the Contact Info with the given keyword
+//	The keyword would be used to search by name of the contacts' owners's name
+func Search(keyword string) ([]*ContactInfo, error) {
+	o := orm.NewOrm()
+
+	//Using query setter to query on the table of table object
+	tableObject := new(ContactInfo)
+	querySetter := o.QueryTable(tableObject)
+
+	//buffer to return result
+	infos := []*ContactInfo{}
+
+	//Select * from contact_info where name likes %keyword%
+	resultCount, err := querySetter.Filter("name__icontains", keyword).All(&infos)
+
+	//Handle when empty result
+	if orm.ErrNoRows == err {
+		log.Printf("Not found!\r\n")
+		return infos, nil
+	}
+
+	//Error handle
+	if nil != err {
+		log.Printf("Search contact error: %v\r\n", err)
+		return nil, err
+	}
+
+	//Happy path handle
+	log.Printf("Search contact with keyword = %v found %d result(s)\r\n", keyword, resultCount)
+	return infos, nil
+}
+
 //Parse the contactpb.Contact to ContactInfo
 func Parse(target contactpb.Contact) *ContactInfo {
 
