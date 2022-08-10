@@ -29,6 +29,7 @@ const (
 	UPDATE_CONTACT_ERROR_CODE
 	DELETE_CONTACT_ERROR_CODE
 	DELETE_CONTACT_ERROR_NOT_FOUND_CODE
+	READ_CONTACT_ERROR_CODE
 )
 
 type Server struct{}
@@ -131,6 +132,32 @@ func (server *Server) Delete(ctx context.Context, request *contactpb.DeleteConta
 	}
 
 	response = &contactpb.DeleteContactResponse{
+		StatusCode: SUCCESS_CODE,
+		Message:    "OK",
+	}
+
+	return
+}
+
+//Read the contact from the request
+func (server *Server) Read(ctx context.Context, request *contactpb.ReadContactRequest) (response *contactpb.ReadContactResponse, err error) {
+	log.Println("Read Contact API is called...")
+
+	contact, err := Read(request.GetId())
+
+	if nil != err {
+		response = &contactpb.ReadContactResponse{
+			StatusCode: READ_CONTACT_ERROR_CODE,
+			Message:    "Error while reading contact",
+		}
+
+		return
+	}
+
+	result := ReverseParse(*contact)
+
+	response = &contactpb.ReadContactResponse{
+		Contact:    result,
 		StatusCode: SUCCESS_CODE,
 		Message:    "OK",
 	}
