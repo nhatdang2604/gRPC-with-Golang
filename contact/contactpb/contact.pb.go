@@ -95,6 +95,7 @@ func (x *Contact) GetAddress() string {
 	return ""
 }
 
+//Create Contact
 type InsertContactRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -147,7 +148,7 @@ type InsertContactResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	StatusCode int32  `protobuf:"varint,1,opt,name=statusCode,proto3" json:"statusCode,omitempty"` //0 == statusCode <=> success
+	StatusCode int32  `protobuf:"varint,1,opt,name=statusCode,proto3" json:"statusCode,omitempty"` //1 == statusCode <=> success
 	Message    string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 }
 
@@ -197,6 +198,394 @@ func (x *InsertContactResponse) GetMessage() string {
 	return ""
 }
 
+//Read Contact API
+type ReadContactRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *ReadContactRequest) Reset() {
+	*x = ReadContactRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_contact_contactpb_contact_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReadContactRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReadContactRequest) ProtoMessage() {}
+
+func (x *ReadContactRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contact_contactpb_contact_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReadContactRequest.ProtoReflect.Descriptor instead.
+func (*ReadContactRequest) Descriptor() ([]byte, []int) {
+	return file_contact_contactpb_contact_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ReadContactRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type ReadContactResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Contact *Contact `protobuf:"bytes,1,opt,name=contact,proto3" json:"contact,omitempty"`
+}
+
+func (x *ReadContactResponse) Reset() {
+	*x = ReadContactResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_contact_contactpb_contact_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReadContactResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReadContactResponse) ProtoMessage() {}
+
+func (x *ReadContactResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contact_contactpb_contact_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReadContactResponse.ProtoReflect.Descriptor instead.
+func (*ReadContactResponse) Descriptor() ([]byte, []int) {
+	return file_contact_contactpb_contact_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ReadContactResponse) GetContact() *Contact {
+	if x != nil {
+		return x.Contact
+	}
+	return nil
+}
+
+//Update Contact API
+type UpdateContactRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Contact *Contact `protobuf:"bytes,1,opt,name=contact,proto3" json:"contact,omitempty"`
+}
+
+func (x *UpdateContactRequest) Reset() {
+	*x = UpdateContactRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_contact_contactpb_contact_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateContactRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateContactRequest) ProtoMessage() {}
+
+func (x *UpdateContactRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contact_contactpb_contact_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateContactRequest.ProtoReflect.Descriptor instead.
+func (*UpdateContactRequest) Descriptor() ([]byte, []int) {
+	return file_contact_contactpb_contact_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdateContactRequest) GetContact() *Contact {
+	if x != nil {
+		return x.Contact
+	}
+	return nil
+}
+
+type UpdateContactResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Contact *Contact `protobuf:"bytes,1,opt,name=contact,proto3" json:"contact,omitempty"`
+}
+
+func (x *UpdateContactResponse) Reset() {
+	*x = UpdateContactResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_contact_contactpb_contact_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateContactResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateContactResponse) ProtoMessage() {}
+
+func (x *UpdateContactResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contact_contactpb_contact_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateContactResponse.ProtoReflect.Descriptor instead.
+func (*UpdateContactResponse) Descriptor() ([]byte, []int) {
+	return file_contact_contactpb_contact_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateContactResponse) GetContact() *Contact {
+	if x != nil {
+		return x.Contact
+	}
+	return nil
+}
+
+//Delete Contact API
+type DeleteContactRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *DeleteContactRequest) Reset() {
+	*x = DeleteContactRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_contact_contactpb_contact_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteContactRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteContactRequest) ProtoMessage() {}
+
+func (x *DeleteContactRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contact_contactpb_contact_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteContactRequest.ProtoReflect.Descriptor instead.
+func (*DeleteContactRequest) Descriptor() ([]byte, []int) {
+	return file_contact_contactpb_contact_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DeleteContactRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteContactResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	StatusCode int32  `protobuf:"varint,1,opt,name=statusCode,proto3" json:"statusCode,omitempty"`
+	Message    string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+}
+
+func (x *DeleteContactResponse) Reset() {
+	*x = DeleteContactResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_contact_contactpb_contact_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteContactResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteContactResponse) ProtoMessage() {}
+
+func (x *DeleteContactResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contact_contactpb_contact_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteContactResponse.ProtoReflect.Descriptor instead.
+func (*DeleteContactResponse) Descriptor() ([]byte, []int) {
+	return file_contact_contactpb_contact_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *DeleteContactResponse) GetStatusCode() int32 {
+	if x != nil {
+		return x.StatusCode
+	}
+	return 0
+}
+
+func (x *DeleteContactResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+//Search Contact API
+type SearchContactRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Keyword string `protobuf:"bytes,1,opt,name=keyword,proto3" json:"keyword,omitempty"` //the name of the contact's owner
+}
+
+func (x *SearchContactRequest) Reset() {
+	*x = SearchContactRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_contact_contactpb_contact_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SearchContactRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchContactRequest) ProtoMessage() {}
+
+func (x *SearchContactRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contact_contactpb_contact_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchContactRequest.ProtoReflect.Descriptor instead.
+func (*SearchContactRequest) Descriptor() ([]byte, []int) {
+	return file_contact_contactpb_contact_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *SearchContactRequest) GetKeyword() string {
+	if x != nil {
+		return x.Keyword
+	}
+	return ""
+}
+
+type SearchContactResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Results []*Contact `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"` //return an array of Contact
+}
+
+func (x *SearchContactResponse) Reset() {
+	*x = SearchContactResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_contact_contactpb_contact_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SearchContactResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchContactResponse) ProtoMessage() {}
+
+func (x *SearchContactResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contact_contactpb_contact_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchContactResponse.ProtoReflect.Descriptor instead.
+func (*SearchContactResponse) Descriptor() ([]byte, []int) {
+	return file_contact_contactpb_contact_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *SearchContactResponse) GetResults() []*Contact {
+	if x != nil {
+		return x.Results
+	}
+	return nil
+}
+
 var File_contact_contactpb_contact_proto protoreflect.FileDescriptor
 
 var file_contact_contactpb_contact_proto_rawDesc = []byte{
@@ -218,15 +607,64 @@ var file_contact_contactpb_contact_proto_rawDesc = []byte{
 	0x73, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x43, 0x6f, 0x64, 0x65,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x43, 0x6f,
 	0x64, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x32, 0x5b, 0x0a, 0x0e,
-	0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x49,
-	0x0a, 0x06, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x12, 0x1d, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x61,
-	0x63, 0x74, 0x2e, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x24, 0x0a, 0x12,
+	0x52, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02,
+	0x69, 0x64, 0x22, 0x41, 0x0a, 0x13, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63,
+	0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x07, 0x63, 0x6f, 0x6e,
+	0x74, 0x61, 0x63, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x61, 0x63, 0x74, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x07, 0x63, 0x6f,
+	0x6e, 0x74, 0x61, 0x63, 0x74, 0x22, 0x42, 0x0a, 0x14, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43,
+	0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2a, 0x0a,
+	0x07, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10,
+	0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74,
+	0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x22, 0x43, 0x0a, 0x15, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x2a, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e, 0x43, 0x6f,
+	0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x22, 0x26,
+	0x0a, 0x14, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22, 0x51, 0x0a, 0x15, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
+	0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x1e, 0x0a, 0x0a, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x43, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x0a, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x43, 0x6f, 0x64, 0x65, 0x12,
+	0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x30, 0x0a, 0x14, 0x53, 0x65, 0x61,
+	0x72, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x18, 0x0a, 0x07, 0x6b, 0x65, 0x79, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x6b, 0x65, 0x79, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x43, 0x0a, 0x15, 0x53,
+	0x65, 0x61, 0x72, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x07, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e,
+	0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x07, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73,
+	0x32, 0x81, 0x03, 0x0a, 0x0e, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x53, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x12, 0x49, 0x0a, 0x06, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x12, 0x1d, 0x2e,
+	0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x43, 0x6f,
+	0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x63,
+	0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x43, 0x6f, 0x6e,
+	0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x43,
+	0x0a, 0x04, 0x52, 0x65, 0x61, 0x64, 0x12, 0x1b, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74,
+	0x2e, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e, 0x52, 0x65,
+	0x61, 0x64, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x22, 0x00, 0x12, 0x49, 0x0a, 0x06, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x1d, 0x2e,
+	0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f,
+	0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x63,
+	0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e,
+	0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x49,
+	0x0a, 0x06, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x12, 0x1d, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x61,
+	0x63, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63,
-	0x74, 0x2e, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x15, 0x5a, 0x13, 0x2e, 0x2f, 0x63,
-	0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2f, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x70, 0x62,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x49, 0x0a, 0x06, 0x53, 0x65, 0x61,
+	0x72, 0x63, 0x68, 0x12, 0x1d, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e, 0x53, 0x65,
+	0x61, 0x72, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e, 0x53, 0x65, 0x61,
+	0x72, 0x63, 0x68, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x00, 0x42, 0x15, 0x5a, 0x13, 0x2e, 0x2f, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63,
+	0x74, 0x2f, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -241,21 +679,41 @@ func file_contact_contactpb_contact_proto_rawDescGZIP() []byte {
 	return file_contact_contactpb_contact_proto_rawDescData
 }
 
-var file_contact_contactpb_contact_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_contact_contactpb_contact_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_contact_contactpb_contact_proto_goTypes = []interface{}{
 	(*Contact)(nil),               // 0: contact.Contact
 	(*InsertContactRequest)(nil),  // 1: contact.InsertContactRequest
 	(*InsertContactResponse)(nil), // 2: contact.InsertContactResponse
+	(*ReadContactRequest)(nil),    // 3: contact.ReadContactRequest
+	(*ReadContactResponse)(nil),   // 4: contact.ReadContactResponse
+	(*UpdateContactRequest)(nil),  // 5: contact.UpdateContactRequest
+	(*UpdateContactResponse)(nil), // 6: contact.UpdateContactResponse
+	(*DeleteContactRequest)(nil),  // 7: contact.DeleteContactRequest
+	(*DeleteContactResponse)(nil), // 8: contact.DeleteContactResponse
+	(*SearchContactRequest)(nil),  // 9: contact.SearchContactRequest
+	(*SearchContactResponse)(nil), // 10: contact.SearchContactResponse
 }
 var file_contact_contactpb_contact_proto_depIdxs = []int32{
-	0, // 0: contact.InsertContactRequest.contact:type_name -> contact.Contact
-	1, // 1: contact.ContactService.Insert:input_type -> contact.InsertContactRequest
-	2, // 2: contact.ContactService.Insert:output_type -> contact.InsertContactResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0,  // 0: contact.InsertContactRequest.contact:type_name -> contact.Contact
+	0,  // 1: contact.ReadContactResponse.contact:type_name -> contact.Contact
+	0,  // 2: contact.UpdateContactRequest.contact:type_name -> contact.Contact
+	0,  // 3: contact.UpdateContactResponse.contact:type_name -> contact.Contact
+	0,  // 4: contact.SearchContactResponse.results:type_name -> contact.Contact
+	1,  // 5: contact.ContactService.Insert:input_type -> contact.InsertContactRequest
+	3,  // 6: contact.ContactService.Read:input_type -> contact.ReadContactRequest
+	5,  // 7: contact.ContactService.Update:input_type -> contact.UpdateContactRequest
+	7,  // 8: contact.ContactService.Delete:input_type -> contact.DeleteContactRequest
+	9,  // 9: contact.ContactService.Search:input_type -> contact.SearchContactRequest
+	2,  // 10: contact.ContactService.Insert:output_type -> contact.InsertContactResponse
+	4,  // 11: contact.ContactService.Read:output_type -> contact.ReadContactResponse
+	6,  // 12: contact.ContactService.Update:output_type -> contact.UpdateContactResponse
+	8,  // 13: contact.ContactService.Delete:output_type -> contact.DeleteContactResponse
+	10, // 14: contact.ContactService.Search:output_type -> contact.SearchContactResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_contact_contactpb_contact_proto_init() }
@@ -300,6 +758,102 @@ func file_contact_contactpb_contact_proto_init() {
 				return nil
 			}
 		}
+		file_contact_contactpb_contact_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ReadContactRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_contact_contactpb_contact_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ReadContactResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_contact_contactpb_contact_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateContactRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_contact_contactpb_contact_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateContactResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_contact_contactpb_contact_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteContactRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_contact_contactpb_contact_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteContactResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_contact_contactpb_contact_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SearchContactRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_contact_contactpb_contact_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SearchContactResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -307,7 +861,7 @@ func file_contact_contactpb_contact_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_contact_contactpb_contact_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -334,6 +888,10 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ContactServiceClient interface {
 	Insert(ctx context.Context, in *InsertContactRequest, opts ...grpc.CallOption) (*InsertContactResponse, error)
+	Read(ctx context.Context, in *ReadContactRequest, opts ...grpc.CallOption) (*ReadContactResponse, error)
+	Update(ctx context.Context, in *UpdateContactRequest, opts ...grpc.CallOption) (*UpdateContactResponse, error)
+	Delete(ctx context.Context, in *DeleteContactRequest, opts ...grpc.CallOption) (*DeleteContactResponse, error)
+	Search(ctx context.Context, in *SearchContactRequest, opts ...grpc.CallOption) (*SearchContactResponse, error)
 }
 
 type contactServiceClient struct {
@@ -353,9 +911,49 @@ func (c *contactServiceClient) Insert(ctx context.Context, in *InsertContactRequ
 	return out, nil
 }
 
+func (c *contactServiceClient) Read(ctx context.Context, in *ReadContactRequest, opts ...grpc.CallOption) (*ReadContactResponse, error) {
+	out := new(ReadContactResponse)
+	err := c.cc.Invoke(ctx, "/contact.ContactService/Read", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contactServiceClient) Update(ctx context.Context, in *UpdateContactRequest, opts ...grpc.CallOption) (*UpdateContactResponse, error) {
+	out := new(UpdateContactResponse)
+	err := c.cc.Invoke(ctx, "/contact.ContactService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contactServiceClient) Delete(ctx context.Context, in *DeleteContactRequest, opts ...grpc.CallOption) (*DeleteContactResponse, error) {
+	out := new(DeleteContactResponse)
+	err := c.cc.Invoke(ctx, "/contact.ContactService/Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contactServiceClient) Search(ctx context.Context, in *SearchContactRequest, opts ...grpc.CallOption) (*SearchContactResponse, error) {
+	out := new(SearchContactResponse)
+	err := c.cc.Invoke(ctx, "/contact.ContactService/Search", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ContactServiceServer is the server API for ContactService service.
 type ContactServiceServer interface {
 	Insert(context.Context, *InsertContactRequest) (*InsertContactResponse, error)
+	Read(context.Context, *ReadContactRequest) (*ReadContactResponse, error)
+	Update(context.Context, *UpdateContactRequest) (*UpdateContactResponse, error)
+	Delete(context.Context, *DeleteContactRequest) (*DeleteContactResponse, error)
+	Search(context.Context, *SearchContactRequest) (*SearchContactResponse, error)
 }
 
 // UnimplementedContactServiceServer can be embedded to have forward compatible implementations.
@@ -364,6 +962,18 @@ type UnimplementedContactServiceServer struct {
 
 func (*UnimplementedContactServiceServer) Insert(context.Context, *InsertContactRequest) (*InsertContactResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Insert not implemented")
+}
+func (*UnimplementedContactServiceServer) Read(context.Context, *ReadContactRequest) (*ReadContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+}
+func (*UnimplementedContactServiceServer) Update(context.Context, *UpdateContactRequest) (*UpdateContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedContactServiceServer) Delete(context.Context, *DeleteContactRequest) (*DeleteContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (*UnimplementedContactServiceServer) Search(context.Context, *SearchContactRequest) (*SearchContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
 
 func RegisterContactServiceServer(s *grpc.Server, srv ContactServiceServer) {
@@ -388,6 +998,78 @@ func _ContactService_Insert_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ContactService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadContactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContactServiceServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contact.ContactService/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContactServiceServer).Read(ctx, req.(*ReadContactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContactService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateContactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContactServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contact.ContactService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContactServiceServer).Update(ctx, req.(*UpdateContactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContactService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteContactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContactServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contact.ContactService/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContactServiceServer).Delete(ctx, req.(*DeleteContactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContactService_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchContactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContactServiceServer).Search(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contact.ContactService/Search",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContactServiceServer).Search(ctx, req.(*SearchContactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _ContactService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "contact.ContactService",
 	HandlerType: (*ContactServiceServer)(nil),
@@ -395,6 +1077,22 @@ var _ContactService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Insert",
 			Handler:    _ContactService_Insert_Handler,
+		},
+		{
+			MethodName: "Read",
+			Handler:    _ContactService_Read_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _ContactService_Update_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _ContactService_Delete_Handler,
+		},
+		{
+			MethodName: "Search",
+			Handler:    _ContactService_Search_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

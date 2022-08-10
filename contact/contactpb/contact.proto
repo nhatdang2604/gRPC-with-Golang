@@ -11,15 +11,57 @@ message Contact {
     string address = 4;
 }
 
+//Create Contact 
 message InsertContactRequest {
     Contact contact = 1;
 }
 
 message InsertContactResponse {
-    int32 statusCode = 1;   //0 == statusCode <=> success
+    int32 statusCode = 1;   //1 == statusCode <=> success
     string message = 2;
+}
+
+//Read Contact API
+message ReadContactRequest {
+    int64 id = 1;
+}
+
+message ReadContactResponse {
+    Contact contact = 1;
+}
+
+//Update Contact API
+message UpdateContactRequest {
+    Contact contact = 1;
+}
+
+message UpdateContactResponse {
+    Contact contact = 1;
+}
+
+//Delete Contact API
+message DeleteContactRequest {
+    int64 id = 1;
+}
+
+message DeleteContactResponse {
+    int32 statusCode = 1;
+    string message = 2;
+}
+
+//Search Contact API
+message SearchContactRequest {
+    string keyword = 1; //the name of the contact's owner
+}
+
+message SearchContactResponse {
+    repeated Contact results = 1;   //return an array of Contact
 }
 
 service ContactService {
     rpc Insert(InsertContactRequest) returns (InsertContactResponse){}
+    rpc Read(ReadContactRequest) returns (ReadContactResponse){}
+    rpc Update(UpdateContactRequest) returns (UpdateContactResponse){}
+    rpc Delete(DeleteContactRequest) returns (DeleteContactResponse){}
+    rpc Search(SearchContactRequest) returns (SearchContactResponse){}
 }
