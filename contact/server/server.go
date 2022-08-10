@@ -24,35 +24,12 @@ const (
 	STRING_CONNECT_METADATA = "root:dangkl123@tcp(127.0.0.1:3306)/contact?charset=utf8"
 
 	//Errors code from Insert Contact API
-	INSERT_CONTACT_SUCCESS_CODE = 1
-	INSERT_CONTACT_ERROR_CODE   = 2
+	SUCCESS_CODE              = 1
+	INSERT_CONTACT_ERROR_CODE = 2
+	UPDATE_CONTACT_ERROR_CODE = 3
 )
 
 type Server struct{}
-
-//Insert the contact from the request
-func (server *Server) Insert(ctx context.Context, request *contactpb.InsertContactRequest) (response *contactpb.InsertContactResponse, err error) {
-	log.Println("Insert Contact API is called...")
-
-	contactInfo := Parse(*request.GetContact())
-	err = contactInfo.Insert()
-
-	if nil != err {
-		response = &contactpb.InsertContactResponse{
-			StatusCode: INSERT_CONTACT_ERROR_CODE,
-			Message:    "Error while inserting contact",
-		}
-
-		return
-	}
-
-	response = &contactpb.InsertContactResponse{
-		StatusCode: INSERT_CONTACT_SUCCESS_CODE,
-		Message:    "OK",
-	}
-
-	return
-}
 
 func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
@@ -72,6 +49,54 @@ func init() {
 	}
 
 	log.Println("Connect database successfully")
+}
+
+//Insert the contact from the request
+func (server *Server) Insert(ctx context.Context, request *contactpb.InsertContactRequest) (response *contactpb.InsertContactResponse, err error) {
+	log.Println("Insert Contact API is called...")
+
+	contactInfo := Parse(*request.GetContact())
+	err = contactInfo.Insert()
+
+	if nil != err {
+		response = &contactpb.InsertContactResponse{
+			StatusCode: INSERT_CONTACT_ERROR_CODE,
+			Message:    "Error while inserting contact",
+		}
+
+		return
+	}
+
+	response = &contactpb.InsertContactResponse{
+		StatusCode: SUCCESS_CODE,
+		Message:    "OK",
+	}
+
+	return
+}
+
+//Update the contact from the request
+func (server *Server) Update(ctx context.Context, request *contactpb.UpdateContactRequest) (response *contactpb.UpdateContactResponse, err error) {
+	log.Println("Update Contact API is called...")
+
+	contactInfo := Parse(*request.GetContact())
+	err = contactInfo.Update()
+
+	if nil != err {
+		response = &contactpb.UpdateContactResponse{
+			StatusCode: UPDATE_CONTACT_ERROR_CODE,
+			Message:    "Error while Updating contact",
+		}
+
+		return
+	}
+
+	response = &contactpb.UpdateContactResponse{
+		StatusCode: SUCCESS_CODE,
+		Message:    "OK",
+	}
+
+	return
 }
 
 func main() {

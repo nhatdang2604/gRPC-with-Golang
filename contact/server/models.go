@@ -117,3 +117,17 @@ func Parse(target contactpb.Contact) *ContactInfo {
 
 	return &result
 }
+
+//Parse the ContactInfo to contactpb.Contact
+func ReverseParse(target ContactInfo) *contactpb.Contact {
+
+	//Using target getter to inject to the ContactInfo
+	result := contactpb.Contact{
+		Id:          target.Id,
+		PhoneNumber: target.PhoneNumber,
+		Name:        target.Name,
+		Address:     target.Address,
+	}
+
+	return &result
+}

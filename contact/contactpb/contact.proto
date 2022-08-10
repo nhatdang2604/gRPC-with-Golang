@@ -28,6 +28,8 @@ message ReadContactRequest {
 
 message ReadContactResponse {
     Contact contact = 1;
+    int32 statusCode = 2;
+    string message = 3;
 }
 
 //Update Contact API
@@ -36,7 +38,8 @@ message UpdateContactRequest {
 }
 
 message UpdateContactResponse {
-    Contact contact = 1;
+    int32 statusCode = 1;
+    string message = 2;
 }
 
 //Delete Contact API
