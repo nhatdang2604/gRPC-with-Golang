@@ -23,7 +23,7 @@ func (info *ContactInfo) Insert() error {
 		return err
 	}
 
-	log.Printf("Insert contact with id = %v successfully", id)
+	log.Printf("Insert contact with id = %v successfully\r\n", id)
 	return nil
 }
 
@@ -34,11 +34,25 @@ func (info *ContactInfo) Update() error {
 	//Update all fields of the current info
 	_, err := o.Update(info)
 	if nil != err {
-		log.Printf("Update contact with id = %v error: %v\r\n", info.Id, err)
+		log.Printf("Update contact error: %v\r\n", err)
 		return err
 	}
 
-	log.Printf("Update contact with id = %v successfully", info.Id)
+	log.Printf("Update contact with id = %v successfully\r\n", info.Id)
+	return nil
+}
+
+//Delete the caller contact from the database
+func (info *ContactInfo) Delete() error {
+	o := orm.NewOrm()
+
+	_, err := o.Delete(info)
+	if nil != err {
+		log.Printf("Delete contact error: %v\r\n", err)
+		return err
+	}
+
+	log.Printf("Delete contact with id = %v successfully\r\n", info.Id)
 	return nil
 }
 
