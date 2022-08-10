@@ -56,6 +56,22 @@ func (info *ContactInfo) Delete() error {
 	return nil
 }
 
+//Read the Contact Info with the given id from database
+func Read(id int64) (*ContactInfo, error) {
+	o := orm.NewOrm()
+
+	info := &ContactInfo{Id: id}
+	err := o.Read(info)
+
+	if nil != err {
+		log.Printf("Read contact error: %v\r\n", err)
+		return nil, err
+	}
+
+	log.Printf("Read contact with id = %v successfully\r\n", id)
+	return info, nil
+}
+
 //Parse the contactpb.Contact to ContactInfo
 func Parse(target contactpb.Contact) *ContactInfo {
 
