@@ -24,9 +24,11 @@ const (
 	STRING_CONNECT_METADATA = "root:dangkl123@tcp(127.0.0.1:3306)/contact?charset=utf8"
 
 	//Errors code from Insert Contact API
-	SUCCESS_CODE              = 1
-	INSERT_CONTACT_ERROR_CODE = 2
-	UPDATE_CONTACT_ERROR_CODE = 3
+	SUCCESS_CODE = iota + 1 //start SUCCESS_CODE with 1
+	INSERT_CONTACT_ERROR_CODE
+	UPDATE_CONTACT_ERROR_CODE
+	DELETE_CONTACT_ERROR_CODE
+	DELETE_CONTACT_ERROR_NOT_FOUND_CODE
 )
 
 type Server struct{}
@@ -92,6 +94,43 @@ func (server *Server) Update(ctx context.Context, request *contactpb.UpdateConta
 	}
 
 	response = &contactpb.UpdateContactResponse{
+		StatusCode: SUCCESS_CODE,
+		Message:    "OK",
+	}
+
+	return
+}
+
+//Delete the contact from the request
+func (server *Server) Delete(ctx context.Context, request *contactpb.DeleteContactRequest) (response *contactpb.DeleteContactResponse, err error) {
+	log.Println("Delete Contact API is called...")
+
+	//Try to find the deleted contact with the given id
+	contactInfo, err := Read(request.GetId())
+
+	//Check if the contact was existed
+	if nil != contactInfo {
+		response = &contactpb.DeleteContactResponse{
+			StatusCode: DELETE_CONTACT_ERROR_NOT_FOUND_CODE,
+			Message:    "The contact is not existed",
+		}
+
+		return
+	}
+
+	err = contactInfo.Delete()
+
+	//Error handling after deleting contact
+	if nil != err {
+		response = &contactpb.DeleteContactResponse{
+			StatusCode: DELETE_CONTACT_ERROR_CODE,
+			Message:    "Error while Deleting contact",
+		}
+
+		return
+	}
+
+	response = &contactpb.DeleteContactResponse{
 		StatusCode: SUCCESS_CODE,
 		Message:    "OK",
 	}
