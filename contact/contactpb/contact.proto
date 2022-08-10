@@ -59,6 +59,8 @@ message SearchContactRequest {
 
 message SearchContactResponse {
     repeated Contact results = 1;   //return an array of Contact
+    int32 statusCode = 2;
+    string message = 3;
 }
 
 service ContactService {

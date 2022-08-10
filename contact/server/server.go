@@ -30,6 +30,7 @@ const (
 	DELETE_CONTACT_ERROR_CODE
 	DELETE_CONTACT_ERROR_NOT_FOUND_CODE
 	READ_CONTACT_ERROR_CODE
+	SEARCH_CONTACT_ERROR_CODE
 )
 
 type Server struct{}
@@ -158,6 +159,41 @@ func (server *Server) Read(ctx context.Context, request *contactpb.ReadContactRe
 
 	response = &contactpb.ReadContactResponse{
 		Contact:    result,
+		StatusCode: SUCCESS_CODE,
+		Message:    "OK",
+	}
+
+	return
+}
+
+//Search the contact from the request
+func (server *Server) Search(ctx context.Context, request *contactpb.SearchContactRequest) (response *contactpb.SearchContactResponse, err error) {
+	log.Println("Search Contact API is called...")
+
+	infos, err := Search(request.GetKeyword())
+
+	if nil != err {
+		response = &contactpb.SearchContactResponse{
+			StatusCode: SEARCH_CONTACT_ERROR_CODE,
+			Message:    "Error while Searching contact",
+		}
+
+		return
+	}
+
+	//Convert from []*ContactInfo to []*contactpb.Contact
+	results := []*contactpb.Contact{}
+	for _, info := range infos {
+		results = append(results, &contactpb.Contact{
+			Id:          info.Id,
+			PhoneNumber: info.PhoneNumber,
+			Name:        info.Name,
+			Address:     info.Address,
+		})
+	}
+
+	response = &contactpb.SearchContactResponse{
+		Results:    results,
 		StatusCode: SUCCESS_CODE,
 		Message:    "OK",
 	}
