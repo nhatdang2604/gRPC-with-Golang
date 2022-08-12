@@ -45,6 +45,35 @@ func InsertContact(client contactpb.ContactServiceClient, contact *contactpb.Con
 	return nil
 }
 
+//Callee to Update a contact to the database
+func UpdateContact(client contactpb.ContactServiceClient, contact *contactpb.Contact) error {
+
+	//Logging
+	log.Println("Calling Update Contact API....")
+
+	//Create the request
+	request := &contactpb.UpdateContactRequest{
+		Contact: contact,
+	}
+
+	//Send the request
+	response, err := client.Update(
+		context.Background(),
+		request,
+	)
+
+	//Error handling after sending request
+	if nil != err {
+		log.Printf("Error while calling the Update Contact API: %v", err)
+		return err
+	}
+
+	//Print the response
+	log.Printf("Update Contact API responsed: %v", response)
+
+	return nil
+}
+
 func main() {
 	connection, err := grpc.Dial(strings.Join([]string{IP, PORT}, ":"), grpc.WithInsecure())
 
@@ -57,13 +86,17 @@ func main() {
 
 	client := contactpb.NewContactServiceClient(connection)
 
-	//Try to insert a contact
-	InsertContact(
-		client,
-		&contactpb.Contact{
-			PhoneNumber: "111111111111111",
-			Address:     "Test",
-			Name:        "Test",
-		},
-	)
+	//Dummy value for testing API
+	contact := &contactpb.Contact{
+
+		PhoneNumber: "111111111111111",
+		Address:     "Test",
+		Name:        "Test",
+	}
+
+	//InsertContact(client, contact)
+
+	contact.Id = 2
+	contact.Name = "Test000"
+	UpdateContact(client, contact)
 }
