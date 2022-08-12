@@ -103,6 +103,35 @@ func DeleteContact(client contactpb.ContactServiceClient, id int64) error {
 	return nil
 }
 
+//Callee to Read a contact to the database
+func ReadContact(client contactpb.ContactServiceClient, id int64) error {
+
+	//Logging
+	log.Println("Calling Read Contact API....")
+
+	//Create the request
+	request := &contactpb.ReadContactRequest{
+		Id: id,
+	}
+
+	//Send the request
+	response, err := client.Read(
+		context.Background(),
+		request,
+	)
+
+	//Error handling after sending request
+	if nil != err {
+		log.Printf("Error while calling the Read Contact API: %v", err)
+		return err
+	}
+
+	//Print the response
+	log.Printf("Read Contact API responsed: %v", response)
+
+	return nil
+}
+
 func main() {
 	connection, err := grpc.Dial(strings.Join([]string{IP, PORT}, ":"), grpc.WithInsecure())
 
@@ -132,6 +161,10 @@ func main() {
 	// UpdateContact(client, contact)
 
 	//Execute Delete API
-	deletedContactId := int64(2)
-	DeleteContact(client, deletedContactId)
+	// deletedContactId := int64(2)
+	// DeleteContact(client, deletedContactId)
+
+	//Execute Read API
+	readContactId := int64(3)
+	ReadContact(client, readContactId)
 }
