@@ -31,6 +31,7 @@ const (
 	DELETE_CONTACT_ERROR_NOT_FOUND_CODE
 	READ_CONTACT_ERROR_CODE
 	SEARCH_CONTACT_ERROR_CODE
+	SEARCH_CONTACT_ERROR_NOT_FOUND_CODE
 )
 
 type Server struct{}
@@ -176,6 +177,16 @@ func (server *Server) Search(ctx context.Context, request *contactpb.SearchConta
 		response = &contactpb.SearchContactResponse{
 			StatusCode: SEARCH_CONTACT_ERROR_CODE,
 			Message:    "Error while Searching contact",
+		}
+
+		return
+	}
+
+	//Check if there is no result
+	if len(infos) == 0 {
+		response = &contactpb.SearchContactResponse{
+			StatusCode: SEARCH_CONTACT_ERROR_NOT_FOUND_CODE,
+			Message:    "Not found any",
 		}
 
 		return
