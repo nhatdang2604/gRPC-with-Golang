@@ -74,6 +74,35 @@ func UpdateContact(client contactpb.ContactServiceClient, contact *contactpb.Con
 	return nil
 }
 
+//Callee to Delete a contact to the database
+func DeleteContact(client contactpb.ContactServiceClient, id int64) error {
+
+	//Logging
+	log.Println("Calling Delete Contact API....")
+
+	//Create the request
+	request := &contactpb.DeleteContactRequest{
+		Id: id,
+	}
+
+	//Send the request
+	response, err := client.Delete(
+		context.Background(),
+		request,
+	)
+
+	//Error handling after sending request
+	if nil != err {
+		log.Printf("Error while calling the Delete Contact API: %v", err)
+		return err
+	}
+
+	//Print the response
+	log.Printf("Delete Contact API responsed: %v", response)
+
+	return nil
+}
+
 func main() {
 	connection, err := grpc.Dial(strings.Join([]string{IP, PORT}, ":"), grpc.WithInsecure())
 
@@ -86,17 +115,23 @@ func main() {
 
 	client := contactpb.NewContactServiceClient(connection)
 
-	//Dummy value for testing API
-	contact := &contactpb.Contact{
+	//Dummy value for testing Insert/Update API
+	// contact := &contactpb.Contact{
 
-		PhoneNumber: "111111111111111",
-		Address:     "Test",
-		Name:        "Test",
-	}
+	// 	PhoneNumber: "111111111111111",
+	// 	Address:     "Test",
+	// 	Name:        "Test",
+	// }
 
+	//Execute Insert API
 	//InsertContact(client, contact)
 
-	contact.Id = 2
-	contact.Name = "Test000"
-	UpdateContact(client, contact)
+	//Execute Update API
+	// contact.Id = 2
+	// contact.Name = "Test000"
+	// UpdateContact(client, contact)
+
+	//Execute Delete API
+	deletedContactId := int64(2)
+	DeleteContact(client, deletedContactId)
 }

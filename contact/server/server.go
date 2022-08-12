@@ -110,8 +110,8 @@ func (server *Server) Delete(ctx context.Context, request *contactpb.DeleteConta
 	//Try to find the deleted contact with the given id
 	contactInfo, err := Read(request.GetId())
 
-	//Check if the contact was existed
-	if nil != contactInfo {
+	//Check if the contact was not existed
+	if nil == contactInfo {
 		response = &contactpb.DeleteContactResponse{
 			StatusCode: DELETE_CONTACT_ERROR_NOT_FOUND_CODE,
 			Message:    "The contact is not existed",
