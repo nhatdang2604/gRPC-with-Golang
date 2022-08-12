@@ -103,7 +103,7 @@ func DeleteContact(client contactpb.ContactServiceClient, id int64) error {
 	return nil
 }
 
-//Callee to Read a contact to the database
+//Callee to Read a contact from the database
 func ReadContact(client contactpb.ContactServiceClient, id int64) error {
 
 	//Logging
@@ -132,6 +132,35 @@ func ReadContact(client contactpb.ContactServiceClient, id int64) error {
 	return nil
 }
 
+//Callee to Search a contact from the database
+func SearchContact(client contactpb.ContactServiceClient, keyword string) error {
+
+	//Logging
+	log.Println("Calling Search Contact API....")
+
+	//Create the request
+	request := &contactpb.SearchContactRequest{
+		Keyword: keyword,
+	}
+
+	//Send the request
+	response, err := client.Search(
+		context.Background(),
+		request,
+	)
+
+	//Error handling after sending request
+	if nil != err {
+		log.Printf("Error while calling the Search Contact API: %v", err)
+		return err
+	}
+
+	//Print the response
+	log.Printf("Search Contact API responsed: %v", response)
+
+	return nil
+}
+
 func main() {
 	connection, err := grpc.Dial(strings.Join([]string{IP, PORT}, ":"), grpc.WithInsecure())
 
@@ -146,14 +175,14 @@ func main() {
 
 	//Dummy value for testing Insert/Update API
 	// contact := &contactpb.Contact{
-
+	// 	Id:          int64(2),
 	// 	PhoneNumber: "111111111111111",
 	// 	Address:     "Test",
 	// 	Name:        "Test",
 	// }
 
 	//Execute Insert API
-	//InsertContact(client, contact)
+	// InsertContact(client, contact)
 
 	//Execute Update API
 	// contact.Id = 2
@@ -165,6 +194,10 @@ func main() {
 	// DeleteContact(client, deletedContactId)
 
 	//Execute Read API
-	readContactId := int64(3)
-	ReadContact(client, readContactId)
+	// readContactId := int64(3)
+	// ReadContact(client, readContactId)
+
+	//Execute Search API
+	keyword := "Test001"
+	SearchContact(client, keyword)
 }
