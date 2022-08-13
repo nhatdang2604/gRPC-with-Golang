@@ -14,8 +14,8 @@ import (
 )
 
 const (
-	IP            = "localhost"
-	ENDPOINT_PORT = "9090"
+	IP               = "localhost"
+	GRPC_SERVER_PORT = "50080"
 
 	PORT = "8081"
 )
@@ -24,7 +24,7 @@ var (
 
 	//Command-line options:
 	//gRPC server endpoint
-	grpcServerEndpoint = flag.String("grpc-server-endpoint", strings.Join([]string{IP, ENDPOINT_PORT}, ":"), "gRPC server endpoint")
+	grpcServerEndpoint = flag.String("grpc-server-endpoint", strings.Join([]string{IP, GRPC_SERVER_PORT}, ":"), "gRPC server endpoint")
 )
 
 func run() error {
