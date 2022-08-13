@@ -21,3 +21,32 @@
 - Browse to the root folder
 - Run this command: `make run-cal-client` to run the code binding in the **Makefile** file
 - We would see the notification that the client is communicating with the server on console
+
+## How to run the code in *contact* folder's project
+### Run the server
+- Browse to the root folder
+- Run this command: `make run-contact-server` to run the code binding in the **Makefile** file
+- We would see the notification that the server is running on console
+
+### Run the client app
+- Browse to the root folder
+- Run this command: `make run-contact-client` to run the code binding in the **Makefile** file
+- We would see the notification that the client is communicating with the server on console
+
+## How to run the code in *contact* folder's project
+### Run the server
+- Browse to the root folder
+- Run this command: `make run-gateway-server` to run the code binding in the **Makefile** file
+- We would see the notification that the server is running on console
+
+### Run the reverse proxy
+- Browse to the root folder
+- Run this command: `make run-gateway-rproxy` to run the code binding in the **Makefile** file
+- We would see the notification that the server is running on console
+- At this moment, the backend was already available
+
+### Using Curl/Postman to request to the backend
+- The URL of the API is http://localhost:8081/api/echo
+- The type of API is POST
+- JSON format is {"msg": string}
+- Using Curl/Postman or any type of app to request to the backend with the above specs, you would get the response, and the server would be logging the process
