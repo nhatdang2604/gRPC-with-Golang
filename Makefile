@@ -21,3 +21,8 @@ gen-gateway-stub:
 		gateway/gatewaypb/gateway.proto
 gen-rp:
 	protoc-gen-grpc-gateway
+update-gateway-stub:
+	protoc -I . --grpc-gateway_out ./ \
+		--grpc-gateway_opt logtostderr=true \
+		--grpc-gateway_opt paths=source_relative \
+		gateway/gatewaypb/gateway.proto
