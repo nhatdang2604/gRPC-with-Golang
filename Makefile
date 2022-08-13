@@ -14,3 +14,8 @@ run-contact-client:
 
 gen-gateway:
 	protoc gateway/gatewaypb/gateway.proto --go_out=plugins=grpc:.
+gen-gateway-stub:
+	protoc -I . \
+		--go_out ./ --go_opt paths=source_relative \
+		--go-grpc_out ./ --go-grpc_opt paths=source_relative \
+		gateway/gatewaypb/gateway.proto
