@@ -29,4 +29,4 @@ update-gateway-stub:
 run-gateway-server:
 	go run gateway/server/server.go
 run-gateway-rproxy:
-	go run proxy.go
+	go run gateway/proxy/proxy.go

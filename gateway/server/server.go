@@ -27,6 +27,9 @@ func (server *Server) Echo(ctx context.Context, message *gatewaypb.StringMessage
 	//Get message from request
 	msg := message.GetMsg()
 
+	//Log the message out
+	log.Printf("Server recieved message: %v\r\n", msg)
+
 	//Binding message to the response
 	response := &gatewaypb.StringMessage{
 		Msg: msg,
