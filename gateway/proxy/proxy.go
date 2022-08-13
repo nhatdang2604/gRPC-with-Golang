@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"flag"
+	"log"
 	"net/http"
 	"strings"
 
@@ -57,6 +58,7 @@ func main() {
 	flag.Parse()
 	defer glog.Flush()
 
+	log.Println("The reverse proxy is running...")
 	if err := run(); nil != err {
 		glog.Fatal(err)
 	}
