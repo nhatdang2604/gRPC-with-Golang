@@ -47,6 +47,7 @@ func main() {
 
 	server := grpc.NewServer()
 	gatewaypb.RegisterDemoGatewayServer(server, &Server{})
+
 	log.Println("Gateway Server is running")
 	err = server.Serve(listener)
 
