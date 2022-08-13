@@ -8,6 +8,6 @@ message StringMessage {
     string msg = 1;
 }
 
-service DemoGateWay {
+service DemoGateway {
     rpc Echo(StringMessage) returns (StringMessage) {}
 }

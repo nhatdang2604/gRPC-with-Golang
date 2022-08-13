@@ -11,3 +11,6 @@ run-contact-server:
 	go run contact/server/server.go contact/server/models.go
 run-contact-client:
 	go run contact/client/client.go
+
+gen-gateway:
+	protoc gateway/gatewaypb/gateway.proto --go_out=plugins=grpc:.
