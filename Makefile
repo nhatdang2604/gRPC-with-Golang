@@ -19,3 +19,5 @@ gen-gateway-stub:
 		--go_out ./ --go_opt paths=source_relative \
 		--go-grpc_out ./ --go-grpc_opt paths=source_relative \
 		gateway/gatewaypb/gateway.proto
+gen-rp:
+	protoc-gen-grpc-gateway

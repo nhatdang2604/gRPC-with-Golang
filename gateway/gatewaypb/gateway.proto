@@ -4,10 +4,17 @@ package gateway;
 
 option go_package = "./gateway/gatewaypb";
 
+import "google/api/annotations.proto";
+
 message StringMessage {
     string msg = 1;
 }
 
 service DemoGateway {
-    rpc Echo(StringMessage) returns (StringMessage) {}
+    rpc Echo(StringMessage) returns (StringMessage) {
+        option (google.api.http) = {
+            post: "/api/echo"
+            body: "*"
+        };
+    }
 }
