@@ -26,3 +26,7 @@ update-gateway-stub:
 		--grpc-gateway_opt logtostderr=true \
 		--grpc-gateway_opt paths=source_relative \
 		gateway/gatewaypb/gateway.proto
+run-gateway-server:
+	go run gateway/server/server.go
+run-gateway-rproxy:
+	go run proxy.go
